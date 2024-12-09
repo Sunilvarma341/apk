@@ -1,0 +1,15 @@
+<div style="height: 30px;" > </div>
+<nav>
+  <% if cookies[:auth_token] %>
+    <%= link_to 'Logout', logout_user_index_path, method: :delete, data: { confirm: 'Are you sure you want to logout?' } %>
+  <% else %>
+    <%= link_to 'Login', login_user_index_path %>
+  <% end %>
+</nav>
+
+
+<form action="/api/v1/create_room" method="post">
+  <h1>Chat Boot</h1>
+  <input type="text" name="room_name" >
+  <button type="submit">Create Room</button>
+</form>

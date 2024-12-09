@@ -9,4 +9,6 @@ class User < ApplicationRecord
   #   key =  Rails.application.secrets.secret_key_base 
   #   puts "=============== #{key}" 
   # end
+  has_many :rooms
+  has_many :room_messages
 end

@@ -1,37 +1,37 @@
 Rails.application.routes.draw do
 #   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  # creating socket end points 
+  mount ActionCable.server => '/wrtc'
+
+  root to: 'chat#chat_boot'
+
 
   scope  :api  do  
     scope  :v1 do 
       resources :user do 
         collection do
           post 'post_user_details', to: 'user#postUserDetails' 
+          get 'sign_up', to: 'user#sign_up' 
           post 'user_signin', to: 'user#userLogin'
+          get 'login', to: 'user#login'
+          delete 'logout', to: 'user#logout' 
           get 'getToken' ,  to: 'user#getToken'
-        end
+
+          ########################## api routes 
+          post 'mob_post_user_details', to: 'user#mob_post_user_details' 
+          post 'user_login', to: 'user#mob_user_login'
+         end
       end
+
+      # resources :books  # , only: [:getBooks]      
+      get "books" ,  to: 'book#getBooks'
+      get "chat_boot" ,  to: 'chat#chat_boot'
+      post  "create_room",  to: 'chat#create_room' 
+    
   end 
 end
-# config/routes.rb
-#   namespace :api do
-#     namespace :v1 do
-    
-#       post 'userLogin', to: 'user#userLogin'
-#       post 'userDetails', to: 'user#postUserDetails' 
-#       resources :users, only: [] do
-#         # You can add more custom routes here if necessary
-#       end
-#     end
-#   end
+
 end 
 
 
-# {
-#     "user": {
-#         "id": 1,
-#         "email": "users@example.com",
-#         "created_at": "2024-11-11T16:34:35.713Z",
-#         "updated_at": "2024-11-11T16:34:35.713Z",
-#         "password_digest": "$2a$12$2IKb5mytlEmeTU3Iv8oBe.J4Rvf7XnXKJqYR/S24VpObFspDePaA."
-#     }
-# }

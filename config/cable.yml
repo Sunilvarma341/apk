@@ -1,5 +1,6 @@
 development:
   adapter: async
+  url: ws://localhost:3001/wrtc
 
 test:
   adapter: test

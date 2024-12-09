@@ -23,11 +23,28 @@ module Apk
       config.eager_load_paths +=   %W(#{config.root}/app/middleware/request_timer_middleware.rb)
       #  puts "Loaded classes: #{Rails.application.eager_load_namespaces}"   
 
-      config.middleware.use RequestTimerMiddleware  
+      
+      
+      
+      # cross origin resourese sharing 
+      config.middleware.insert_before 0, Rack::Cors do
+        allow do
+          origins 'localhost:3000', /https*:\/\/.*?bloopist\.com/
+          resource '*', :headers => :any, :methods => :any
+        end
+      end
+      
+      config.middleware.use RequestTimerMiddleware
 
     # config.middleware.insert_before 0, RequestTimerMiddleware
 
     # config.middleware.insert_after Rails::Rack::Logger, RequestTimerMiddleware
+
+
+    # below code is used for  end points for websockets 
+    # config.action_cable.mount_path = "/cable"  # this is the  one way to create single end point 
+    # multiple end point 
+      
 
 ###############################
     # Configuration for the application, engines, and railties goes here.

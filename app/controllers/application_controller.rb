@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery unless: -> { request.format.json? 
   # before_action :auth_request
   # skip_before_action :auth_request, only: [:userLogin]
-  before_action :auth_request, except: [:userLogin]
+  before_action :auth_request, except: [:userLogin , :chat_boot, :create_room ,  :login ,:sign_up , :postUserDetails ,  :mob_post_user_details  , :mob_user_login]
 
   if Rails.env.development?
     puts "Running in development mode"
@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     puts "Running in test mode"
   end
   
-
+  
  private
 
   def auth_request 
